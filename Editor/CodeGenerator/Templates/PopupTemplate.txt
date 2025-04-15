@@ -1,0 +1,20 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class #CLASSNAME# : MonoBehaviour
+{
+#region References
+#endregion References
+
+#region Fields
+#endregion Fields
+
+#region Properties
+#endregion Properties
+
+#region Unity Methods
+#endregion Unity Methods
+
+#region Methods
+#endregion Methods
+}

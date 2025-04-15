@@ -1,0 +1,3 @@
+[SerializeField] #MODIFIER# Button #FIELD_NAME#;
+#FIELD_NAME#.onClick.AddListener(OnPress#FORMAT_FIELD_NAME#);
+#MODIFIER# void OnPress#FORMAT_FIELD_NAME#(){}

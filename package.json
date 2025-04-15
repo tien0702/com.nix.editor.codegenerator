@@ -1,0 +1,14 @@
+{
+  "name": "com.tiennix.codegen",
+  "version": "1.0.0",
+  "displayName": "Code Generator",
+  "description": "This is a code generator package for Unity.",
+  "unity": "2022.3",
+  "documentationUrl": "https://example.com/",
+  "changelogUrl": "https://example.com/changelog.html",
+  "licensesUrl": "https://example.com/licensing.html",
+  "author": {
+    "name": "NIX",
+    "email": "tientv.0702@gmail.com"
+  }
+}
