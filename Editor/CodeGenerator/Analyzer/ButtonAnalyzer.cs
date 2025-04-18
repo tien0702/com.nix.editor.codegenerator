@@ -17,7 +17,7 @@ namespace NIX.Editor.CodeGenerator
             {
                 string name = btn.gameObject.name;
                 string fieldName = $"_{char.ToLower(name[0])}{name.Substring(1)}";
-                string methodName = $"On{name}";
+                string methodName = $"OnPress{name}";
 
                 string fieldDeclaration = $"[SerializeField] private Button {fieldName};";
                 string awakeLine = $"{fieldName}.onClick.AddListener({methodName});";

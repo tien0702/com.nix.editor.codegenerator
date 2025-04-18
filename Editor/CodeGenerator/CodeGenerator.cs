@@ -73,24 +73,22 @@ namespace NIX.Editor.CodeGenerator
                 string scriptPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
                 if (System.IO.Path.GetFileNameWithoutExtension(scriptPath) == "CodeGenerator")
                 {
-                    // Build path to Templates folder
-                    string baseFolder = System.IO.Path.GetDirectoryName(scriptPath); // .../Editor/CodeGen
+                    // Base folder (same as where CodeGenerator.cs is)
+                    string baseFolder =
+                        System.IO.Path.GetDirectoryName(scriptPath); // e.g., "Packages/com.mytool.codegen/Editor"
                     string templatesFolder = System.IO.Path.Combine(baseFolder, "Templates");
 
                     // Try .txt first
-                    string txtPath =
-                        System.IO.Path.GetFullPath(System.IO.Path.Combine(templatesFolder, $"{type}Template.txt"));
+                    string txtPath = System.IO.Path.Combine(templatesFolder, $"{type}Template.txt");
                     if (System.IO.File.Exists(txtPath))
                         return txtPath;
 
                     // Try .json fallback
-                    string jsonPath =
-                        System.IO.Path.GetFullPath(System.IO.Path.Combine(templatesFolder, $"{type}Template.json"));
+                    string jsonPath = System.IO.Path.Combine(templatesFolder, $"{type}Template.json");
                     if (System.IO.File.Exists(jsonPath))
                         return jsonPath;
 
-                    Debug.LogError(
-                        $"[CodeGen] Neither .txt nor .json template found for type: {type} in path: {templatesFolder}");
+                    Debug.LogError($"[CodeGen] Template file not found for type: {type} in folder: {templatesFolder}");
                     return null;
                 }
             }
