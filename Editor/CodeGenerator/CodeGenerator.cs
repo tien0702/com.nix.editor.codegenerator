@@ -66,34 +66,18 @@ namespace NIX.Editor.CodeGenerator
 
         private static string GetTemplatePath(string type)
         {
-            // Find the path to this script file
-            string[] guids = UnityEditor.AssetDatabase.FindAssets("CodeGenerator t:Script");
-            foreach (string guid in guids)
-            {
-                string scriptPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guid);
-                if (System.IO.Path.GetFileNameWithoutExtension(scriptPath) == "CodeGenerator")
-                {
-                    // Base folder (same as where CodeGenerator.cs is)
-                    string baseFolder =
-                        System.IO.Path.GetDirectoryName(scriptPath); // e.g., "Packages/com.mytool.codegen/Editor"
-                    string templatesFolder = System.IO.Path.Combine(baseFolder, "Templates");
+            // Relative to package (this works both in Assets and PackageCache)
+            string relativePath = "Packages/com.nix.editor.codegenerator/Editor/CodeGenerator/Templates";
 
-                    // Try .txt first
-                    string txtPath = System.IO.Path.Combine(templatesFolder, $"{type}Template.txt");
-                    if (System.IO.File.Exists(txtPath))
-                        return txtPath;
+            string txtPath = System.IO.Path.Combine(relativePath, $"{type}Template.txt");
+            if (System.IO.File.Exists(txtPath))
+                return txtPath;
 
-                    // Try .json fallback
-                    string jsonPath = System.IO.Path.Combine(templatesFolder, $"{type}Template.json");
-                    if (System.IO.File.Exists(jsonPath))
-                        return jsonPath;
+            string jsonPath = System.IO.Path.Combine(relativePath, $"{type}Template.json");
+            if (System.IO.File.Exists(jsonPath))
+                return jsonPath;
 
-                    Debug.LogError($"[CodeGen] Template file not found for type: {type} in folder: {templatesFolder}");
-                    return null;
-                }
-            }
-
-            Debug.LogError("[CodeGen] Cannot locate CodeGenerator script to resolve template path.");
+            Debug.LogError($"[CodeGen] Template file not found for type: {type} in path: {relativePath}");
             return null;
         }
 
